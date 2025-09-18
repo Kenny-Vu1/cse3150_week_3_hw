@@ -2,16 +2,19 @@
 #include <iostream>
 #include <cstring>   // for strlen, strcpy
 
-using std::cout, std::cin, std::string, std::endl;
+using std::strcpy, std::cout, std::cin, std::string, std::endl;
 
 // TODO: function prototypes
 // TODO: implement addStudent
 void addStudent(char* name, double gpa, char* names[], double gpas[], int& size, int capacity){
 	if(size == capacity){
-		break;
+		cout << "List full";
+		return;
 	}
-	names.append(*name);
-	gpas.append(gpa);
+	names[size] = new char[std::strlen(name) +1];
+	strcpy(names[size], name);
+
+	gpas[size] = gpa;
 	size +=1;
 }
 
@@ -23,21 +26,21 @@ void updateGPA(double* gpaPtr, double newGpa){
 }
 
 // TODO: implement printStudent
-void printStudent(const char* name, const double& gpa{
-	cout << *name << " " << gpa << endl; 	
+void printStudent(const char* name, const double& gpa){
+	cout << name << " " << gpa << endl; 	
 }
 
 
 // TODO: implement averageGPA
 double averageGPA(const double gpas[], int size){
 	
-	if(size = 0){
+	if(size == 0){
 	cout << "No students" << endl;
-	break;
+	return 0;
 	}
 
 	double total = 0;
-	for(i = 0; i < size; i++){
+	for(int i = 0; i < size; i++){
 		total += gpas[i];
 	}
 	total = total/size;
@@ -74,24 +77,32 @@ int main(int argc, char* argv[]) {
 		cout << "Enter a Name";
 		cin >> name;
 		cout << "Enter a gpa";
+		double gpa;
 		cin >> gpa;
 
-                addStudent(name, gpa, names, gpas, size, capacity)
+                addStudent(const_cast<char*>(name.c_str()), gpa, names, gpas, size, capacity);
 		break;
             }
             case 2: {
                 // TODO: implement menu logic
 		cout << "Input student idx";
-		cin >> *gpaPtr;
-                cout << "Input new GPA";
+		double *gpaPtr = nullptr;
+		int idx;
+		cin >> idx;
+                
+		cout << "Input new GPA";
+		double newGpa;
 		cin >> newGpa;
 
-		updateGPA(gpaPtr, newGpa);
+		if(idx <= size){
+			gpaPtr = &gpas[idx];
+			updateGPA(gpaPtr, newGpa);
+		}
 		break;
             }
             case 3: {
                 // TODO: implement menu logic
-                for(i=0; i<size; i++){
+                for(int i=0; i<size; i++){
 			printStudent(names[i], gpas[i]);
 		}
 
@@ -100,7 +111,7 @@ int main(int argc, char* argv[]) {
             case 4: {
                 // TODO: implement menu logic
                 double avg = averageGPA(gpas, size);
-		cout << avg <<endl;
+		cout << "Average GPA: " << avg <<endl;
 		break;
             }
             case 5: {
@@ -114,6 +125,9 @@ int main(int argc, char* argv[]) {
     } while (choice != 5);
 
     // TODO: free memory
+	for( int i = 0; i< size; i++){
+		delete[] names[i];
+	}
 
-    return 0;double averageGPA(const double gpas[], int size)
+    return 0;
 }
