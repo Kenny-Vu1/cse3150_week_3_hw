@@ -80,9 +80,9 @@ int main(int argc, char* argv[]) {
             case 1: {
                 // TODO: implement menu logic
 		string name;
-		cout << "Enter a Name";
+		cout << "Enter a Name: ";
 		cin >> name;
-		cout << "Enter a gpa";
+		cout << "Enter a gpa: ";
 		double gpa;
 		cin >> gpa;
 
@@ -91,18 +91,20 @@ int main(int argc, char* argv[]) {
             }
             case 2: {
                 // TODO: implement menu logic
-		cout << "Input student idx";
+		cout << "Input student idx: ";
 		double *gpaPtr = nullptr;
 		int idx;
 		cin >> idx;
                 
-		cout << "Input new GPA";
+		cout << "Input new GPA: ";
 		double newGpa;
 		cin >> newGpa;
 
-		if(idx <= size){
+		if(idx >= 0 && idx < size){
 			gpaPtr = &gpas[idx];
 			updateGPA(gpaPtr, newGpa);
+		}else{
+			cout << "Your Inputed Index is out of bounds" << endl;
 		}
 		break;
             }
