@@ -1,6 +1,7 @@
 
 #include <iostream>
 #include <cstring>   // for strlen, strcpy
+#include <string>
 
 using std::strcpy, std::cout, std::cin, std::string, std::endl;
 
@@ -91,23 +92,23 @@ int main(int argc, char* argv[]) {
             }
             case 2: {
                 // TODO: implement menu logic
-		cout << "Input student idx: ";
-		double *gpaPtr = nullptr;
-		int idx;
-		cin >> idx;
+				cout << "Input student idx: ";
+				double *gpaPtr = nullptr;
+				int idx;
+				cin >> idx;
                 
-		cout << "Input new GPA: ";
-		double newGpa;
-		cin >> newGpa;
+				cout << "Input new GPA: ";
+				double newGpa;
+				cin >> newGpa;
 
-		if(idx >= 0 && idx < size){
-			gpaPtr = &gpas[idx];
-			updateGPA(gpaPtr, newGpa);
-		}else{
-			cout << "Your Inputed Index is out of bounds" << endl;
-		}
-		break;
-            }
+				if(idx >= 0 && idx < size){
+					gpaPtr = &gpas[idx];
+					updateGPA(gpaPtr, newGpa);
+				}else{
+					cout << "Your Inputed Index is out of bounds" << endl;
+				}
+				break;
+					}
             case 3: {
                 // TODO: implement menu logic
                 for(int i=0; i<size; i++){
